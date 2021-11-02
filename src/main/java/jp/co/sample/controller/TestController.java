@@ -15,12 +15,25 @@ public class TestController {
 	private AdministratorRepository repository;
 	
 	@RequestMapping("/admin-repository-insert")
-	public String insert () {
+	public String adminRepositoryInsert () {
 		Administrator administrator = new Administrator();
 		administrator.setName("古本昌幸");
 		administrator.setMailAddress("masayuki@rakus-p.co.jp");
 		administrator.setPassword("masayuki");
 		repository.insert(administrator);
+		
+		return "/administrator/test-finished";
+	}
+	
+	@RequestMapping("/admin-repository-find")
+	public String adminRepositoryFind () {
+		String mailAddress = "masayuki@rakus-p.co.jp";
+		String password = "masayuki" ;
+		
+		for(Administrator admin:repository.findByMailAddressAndPassword(mailAddress, password)) {
+			System.out.println(admin.getName());
+		}
+		
 		
 		return "/administrator/test-finished";
 	}
