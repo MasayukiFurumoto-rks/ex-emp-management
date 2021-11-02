@@ -1,19 +1,66 @@
 package jp.co.sample.domain;
 
-import java.time.LocalDate;
+import java.util.Date;
 
+/**
+ * 従業員を表すドメインクラス<br>
+ * @author cyjoh
+ *
+ */
 public class Employee {
+
+	/** ID(主キー) */
 	private Integer id;
+	
+	/** 名前 */
 	private String name;
+	
+	/** 画像（のURL） */
 	private String image;
+	
+	/** 性別 */
 	private String gender;
-	private LocalDate hireDate;
+	
+	/** 入社日 */
+	private Date hireDate;
+
+	/** メールアドレス */
 	private String mailAddress;
+	
+	/** 郵便番号 */
 	private String zipCode;
+	
+	/** 住所 */
 	private String address;
+	
+	/** 電話番号 */
+	private String telephone;
+	
+	/** 給料 */
 	private Integer salary;
+	
+	/** 特性 */
 	private String characeristics;
+	
+	/** 扶養人数 */
 	private Integer dependentsCount;
+
+	public Employee(Integer id, String name, String image, String gender, Date hireDate, String mailAddress,
+			String zipCode, String address, String telephone, Integer salary, String characeristics,
+			Integer dependentsCount) {
+		this.id = id;
+		this.name = name;
+		this.image = image;
+		this.gender = gender;
+		this.hireDate = hireDate;
+		this.mailAddress = mailAddress;
+		this.zipCode = zipCode;
+		this.address = address;
+		this.telephone = telephone;
+		this.salary = salary;
+		this.characeristics = characeristics;
+		this.dependentsCount = dependentsCount;
+	}
 
 	public Integer getId() {
 		return id;
@@ -47,11 +94,11 @@ public class Employee {
 		this.gender = gender;
 	}
 
-	public LocalDate getHireDate() {
+	public Date getHireDate() {
 		return hireDate;
 	}
 
-	public void setHireDate(LocalDate hireDate) {
+	public void setHireDate(Date hireDate) {
 		this.hireDate = hireDate;
 	}
 
@@ -77,6 +124,14 @@ public class Employee {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 
 	public Integer getSalary() {
@@ -107,8 +162,9 @@ public class Employee {
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + ", image=" + image + ", gender=" + gender + ", hireDate="
 				+ hireDate + ", mailAddress=" + mailAddress + ", zipCode=" + zipCode + ", address=" + address
-				+ ", salary=" + salary + ", characeristics=" + characeristics + ", dependentsCount=" + dependentsCount
-				+ "]";
+				+ ", telephone=" + telephone + ", salary=" + salary + ", characeristics=" + characeristics
+				+ ", dependentsCount=" + dependentsCount + "]";
 	}
 
+	
 }
