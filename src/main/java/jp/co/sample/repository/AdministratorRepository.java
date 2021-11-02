@@ -12,6 +12,11 @@ import org.springframework.stereotype.Repository;
 
 import jp.co.sample.domain.Administrator;
 
+/**
+ * administratorsテーブルとデータをやり取りするレポジトリクラスです。<br>
+ * @author cyjoh
+ *
+ */
 @Repository
 public class AdministratorRepository {
 //	RowMapperを一行で記載する場合は以下。
@@ -33,12 +38,23 @@ public class AdministratorRepository {
 	private NamedParameterJdbcTemplate template ;
 
 
+	/**
+	 * administratorsテーブルにドメイン(1行)を追加するメソッド。<br>
+	 * @param administrator　外部で作成されたadministratorドメイン。
+	 */
 	public void insert(Administrator administrator) {
 		String sql = "INSERT INTO " + TABLE_NAME + " (name,mail_address,password) VALUES (:name,:mailAddress,:password);";
 		SqlParameterSource param = new BeanPropertySqlParameterSource(administrator);
 		template.update(sql, param);
 	}
 	
+	/**
+	 * administratorsテーブルから、引数で受け取ったメールアドレスとパスワードを持つ管理者アカウントを抽出するメソッド。<br>
+	 * 
+	 * @param mailAddress　	外部で指定されたメールアドレス
+	 * @param password		外部で指定されたパスワード
+	 * @return				引数で受け取ったメールアドレスとパスワードを持つ管理者アカウントのリスト
+	 */
 	public List<Administrator> findByMailAddressAndPassword(String mailAddress,String password) {
 		String sql = "SELECT * FROM " +TABLE_NAME + " WHERE mail_address = :mailAddress  and password = :password;";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("mailAddress", mailAddress).addValue("password", password);
