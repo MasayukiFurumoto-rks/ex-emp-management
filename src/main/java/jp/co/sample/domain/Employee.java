@@ -45,6 +45,10 @@ public class Employee {
 	/** 扶養人数 */
 	private Integer dependentsCount;
 
+	
+	public Employee() {
+	}
+
 	public Employee(Integer id, String name, String image, String gender, Date hireDate, String mailAddress,
 			String zipCode, String address, String telephone, Integer salary, String characeristics,
 			Integer dependentsCount) {
