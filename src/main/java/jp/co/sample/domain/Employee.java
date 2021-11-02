@@ -40,7 +40,7 @@ public class Employee {
 	private Integer salary;
 	
 	/** 特性 */
-	private String characeristics;
+	private String characteristics;
 	
 	/** 扶養人数 */
 	private Integer dependentsCount;
@@ -50,7 +50,7 @@ public class Employee {
 	}
 
 	public Employee(Integer id, String name, String image, String gender, Date hireDate, String mailAddress,
-			String zipCode, String address, String telephone, Integer salary, String characeristics,
+			String zipCode, String address, String telephone, Integer salary, String characteristics,
 			Integer dependentsCount) {
 		this.id = id;
 		this.name = name;
@@ -62,7 +62,7 @@ public class Employee {
 		this.address = address;
 		this.telephone = telephone;
 		this.salary = salary;
-		this.characeristics = characeristics;
+		this.characteristics = characteristics;
 		this.dependentsCount = dependentsCount;
 	}
 
@@ -146,12 +146,12 @@ public class Employee {
 		this.salary = salary;
 	}
 
-	public String getCharaceristics() {
-		return characeristics;
+	public String getCharacteristics() {
+		return characteristics;
 	}
 
-	public void setCharaceristics(String characeristics) {
-		this.characeristics = characeristics;
+	public void setCharacteristics(String characteristics) {
+		this.characteristics = characteristics;
 	}
 
 	public Integer getDependentsCount() {
@@ -166,7 +166,7 @@ public class Employee {
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + ", image=" + image + ", gender=" + gender + ", hireDate="
 				+ hireDate + ", mailAddress=" + mailAddress + ", zipCode=" + zipCode + ", address=" + address
-				+ ", telephone=" + telephone + ", salary=" + salary + ", characeristics=" + characeristics
+				+ ", telephone=" + telephone + ", salary=" + salary + ", characteristics=" + characteristics
 				+ ", dependentsCount=" + dependentsCount + "]";
 	}
 
