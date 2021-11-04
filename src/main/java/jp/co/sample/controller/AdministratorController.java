@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
 import jp.co.sample.form.LoginForm;
-import jp.co.sample.service.AdministratorSecvice;
+import jp.co.sample.service.AdministratorService;
 
 /**
  * 管理者アカウントに関する機能を担当するコントローラークラスです。<br>
@@ -21,7 +21,7 @@ import jp.co.sample.service.AdministratorSecvice;
 public class AdministratorController {
 
 	@Autowired
-	private AdministratorSecvice service;
+	private AdministratorService service;
 	
 	/**
 	 * ログイン入力画面に使うフォームクラスをインスタンス化してリクエストスコープに格納するメソッドです。<br>
