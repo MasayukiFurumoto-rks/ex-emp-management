@@ -14,8 +14,8 @@ import jp.co.sample.repository.EmployeeRepository;
  * 
  * @author cyjoh
  *
-  
- *         */
+ * 
+ */
 @Service
 @Transactional
 public class EmployeeService {
@@ -40,5 +40,14 @@ public class EmployeeService {
 	 */
 	public Employee showDetail(Integer id) {
 		return repository.load(id);
+	}
+
+	/**
+	 * 従業員情報を更新するメソッド。<br>
+	 * 
+	 * @param employee 外部で指定された従業員情報
+	 */
+	public void update(Employee employee) {
+		repository.update(employee);
 	}
 }
