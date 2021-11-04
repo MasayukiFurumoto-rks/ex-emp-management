@@ -55,7 +55,7 @@ public class AdministratorRepository {
 	 * @param password		外部で指定されたパスワード
 	 * @return				引数で受け取ったメールアドレスとパスワードを持つ管理者アカウントのリスト
 	 */
-	public List<Administrator> findByMailAddressAndPassword(String mailAddress,String password) {
+	public Administrator findByMailAddressAndPassword(String mailAddress,String password) {
 		String sql = "SELECT * FROM " +TABLE_NAME + " WHERE mail_address = :mailAddress  and password = :password;";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("mailAddress", mailAddress).addValue("password", password);
 		
@@ -63,6 +63,6 @@ public class AdministratorRepository {
 		if(administratorList.size()==0) {
 			return null;
 		}
-		return administratorList;
+		return administratorList.get(0);
 	}
 }

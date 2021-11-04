@@ -35,9 +35,8 @@ public class TestController {
 		String mailAddress = "masayuki@rakus-p.co.jp";
 		String password = "masayuki";
 
-		for (Administrator admin : adminRepository.findByMailAddressAndPassword(mailAddress, password)) {
+		Administrator admin = adminRepository.findByMailAddressAndPassword(mailAddress, password);
 			System.out.println(admin.getName());
-		}
 
 		return "/administrator/test-finished";
 	}

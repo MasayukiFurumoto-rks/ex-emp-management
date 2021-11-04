@@ -1,8 +1,11 @@
 package jp.co.sample.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,8 +24,11 @@ import jp.co.sample.service.AdministratorService;
 public class AdministratorController {
 
 	@Autowired
+	private HttpSession session;
+
+	@Autowired
 	private AdministratorService service;
-	
+
 	/**
 	 * ログイン入力画面に使うフォームクラスをインスタンス化してリクエストスコープに格納するメソッドです。<br>
 	 * 
@@ -43,10 +49,6 @@ public class AdministratorController {
 		return new InsertAdministratorForm();
 	}
 
-	
-	
-	
-	
 	/**
 	 * ログイン画面を表示するためのメソッドです。<br>
 	 * 
@@ -56,7 +58,29 @@ public class AdministratorController {
 	public String toLogin() {
 		return "administrator/login";
 	}
-	
+
+	/**
+	 * ログイン処理を実施するためのコントローラークラスです。<br>
+	 * メールアドレスとパスワードを受け取り、正しければ従業員リストに、誤っていればログイン画面にフォワードします。
+	 * 
+	 * @param form  ログインの入力値を持つフォームです。
+	 * @param model リクエストスコープです。
+	 * @return ログイン成功時は従業員リストを、失敗時にはログイン画面を返します。
+	 * 
+	 */
+	@RequestMapping("/login")
+	public String login(LoginForm form, Model model) {
+		Administrator administrator = service.login(form.getMailAddress(), form.getPassword());
+
+		if (administrator == null) {
+			model.addAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
+			return "login";
+		} else {
+			model.addAttribute("administratorName", administrator.getName());
+			return "forward:/employee/showList";
+		}
+	}
+
 	/**
 	 * 管理者を追加する画面を表示するためのメソッドです。<br>
 	 * 
@@ -71,7 +95,7 @@ public class AdministratorController {
 	 * 管理者を追加する指示を行うメソッドです。<br>
 	 * 
 	 * @param form 管理者登録の情報入力用画面から、InsertAdministratorFormが受け取った内容です。
-	 * @return　ログイン画面を表示するためのURLを返します。
+	 * @return ログイン画面を表示するためのURLを返します。
 	 */
 	@RequestMapping("/insert")
 	public String insert(InsertAdministratorForm form) {
@@ -81,6 +105,4 @@ public class AdministratorController {
 		return "redirect:/";
 	}
 
-	
-	
 }
