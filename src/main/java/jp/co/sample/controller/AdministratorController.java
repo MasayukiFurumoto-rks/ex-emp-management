@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
+import jp.co.sample.form.LoginForm;
 import jp.co.sample.service.AdministratorSecvice;
 
 /**
@@ -22,6 +22,16 @@ public class AdministratorController {
 
 	@Autowired
 	private AdministratorSecvice service;
+	
+	/**
+	 * ログイン入力画面に使うフォームクラスをインスタンス化してリクエストスコープに格納するメソッドです。<br>
+	 * 
+	 * @return インスタンス化したLoginForm
+	 */
+	@ModelAttribute
+	public LoginForm setUpLoginForm() {
+		return new LoginForm();
+	}
 
 	/**
 	 * 管理者を追加する用の入力画面に使うフォームクラスをインスタンス化してリクエストスコープに格納するメソッドです。<br>
@@ -29,10 +39,24 @@ public class AdministratorController {
 	 * @return インスタンス化したInsertAdministratorForm
 	 */
 	@ModelAttribute
-	public InsertAdministratorForm setUpForm() {
+	public InsertAdministratorForm setUpInsertAdministratorForm() {
 		return new InsertAdministratorForm();
 	}
 
+	
+	
+	
+	
+	/**
+	 * ログイン画面を表示するためのメソッドです。<br>
+	 * 
+	 * @return ログイン情報入力画面を返します。
+	 */
+	@RequestMapping("/")
+	public String toLogin() {
+		return "administrator/login";
+	}
+	
 	/**
 	 * 管理者を追加する画面を表示するためのメソッドです。<br>
 	 * 
@@ -57,4 +81,6 @@ public class AdministratorController {
 		return "redirect:/";
 	}
 
+	
+	
 }
