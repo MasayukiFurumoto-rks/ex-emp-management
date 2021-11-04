@@ -76,7 +76,7 @@ public class AdministratorController {
 			model.addAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
 			return "administrator/login";
 		} else {
-			model.addAttribute("administratorName", administrator.getName());
+			session.setAttribute("administratorName", administrator.getName());
 			return "forward:/employee/showList";
 		}
 	}
