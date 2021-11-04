@@ -105,4 +105,16 @@ public class AdministratorController {
 		return "redirect:/";
 	}
 
+	/**
+	 * ログアウトを行うためのメソッドです。<br>
+	 * セッションに保存されている情報を削除し、ログイン画面にリダイレクトします。
+	 * 
+	 * @return　ログイン画面にリダイレクトします。
+	 */
+	@RequestMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
 }
