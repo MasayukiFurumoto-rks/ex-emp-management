@@ -2,8 +2,10 @@ package jp.co.sample.controller;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,5 +55,26 @@ public class EmployeeController {
 		Employee employee = service.showDetail(Integer.parseInt(id));
 		model.addAttribute("employee",employee);
 		return "employee/detail";
+	}
+	
+	/**
+	 * 従業員情報を更新するためのメソッド。
+	 * 
+	 * @param form　従業員情報更新用の画面から送られてきた情報
+	 * @return 従業員一覧の画面にリダイレクトさせるURL
+	 */
+	@RequestMapping("/update")
+	public String update(UpdateEmployeeForm form) {
+		Employee employee = new Employee();
+		//formから送られてきたidをもとに、データベースから従業員情報を取得
+		employee = service.showDetail(Integer.parseInt(form.getId()));
+
+		//formから送られてきた扶養人数を、先程取得した従業員情報に上書き
+		employee.setDependentsCount(Integer.parseInt(form.getDependentsCount()));
+		
+		//その情報をデータベースに反映
+		service.update(employee);
+		
+		return "redirect:/employee/showList";
 	}
 }
