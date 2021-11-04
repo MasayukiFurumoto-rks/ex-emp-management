@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.domain.Employee;
+import jp.co.sample.form.UpdateEmployeeForm;
 import jp.co.sample.service.EmployeeService;
 
 /**
@@ -23,6 +25,11 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService service ;
 	
+	@ModelAttribute
+	public UpdateEmployeeForm setUpUpdateEmployeeForm() {
+		return new UpdateEmployeeForm();
+	}
+	
 	/**
 	 * すべての従業員情報をサービスクラスからもらってきて、それをリクエストスコープに格納するメソッドです。<br>
 	 * @param model　リクエストスコープ
@@ -33,5 +40,18 @@ public class EmployeeController {
 		List<Employee> employeeList = service.showList();
 		model.addAttribute("employeeList", employeeList);
 		return "employee/list";
+	}
+	
+	/**
+	 * 特定の従業員情報をサービスクラスからもらってきて、それをリクエストスコープに格納、その後表示画面へ遷移させるメソッドです。<br>
+	 * @param id　主キー
+	 * @param model　リクエストスコープ
+	 * @return 従業員の詳細情報を表示するためのページを返します。
+	 */
+	@RequestMapping("/showDetail")
+	public String showDetail(String id,Model model) {
+		Employee employee = service.showDetail(Integer.parseInt(id));
+		model.addAttribute("employee",employee);
+		return "employee/detail";
 	}
 }
