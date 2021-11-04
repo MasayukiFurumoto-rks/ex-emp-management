@@ -13,21 +13,32 @@ import jp.co.sample.repository.EmployeeRepository;
  * Employeeドメインに関わる業務処理を行うためのサービスクラス。<br>
  * 
  * @author cyjoh
- *　
- */
+ *
+  
+ *         */
 @Service
 @Transactional
 public class EmployeeService {
-	
+
 	@Autowired
 	private EmployeeRepository repository;
-	
+
 	/**
 	 * 従業員情報を全件取得するメソッド。<br>
+	 * 
 	 * @return 従業員情報を全件取得したリスト。
 	 */
-	public List<Employee> showList(){
+	public List<Employee> showList() {
 		return repository.findAll();
 	}
-	
+
+	/**
+	 * 従業員IDで指定された従業員の情報を返すメソッド。
+	 * 
+	 * @param id 外部で指定された従業員ID
+	 * @return 指定された従業員IDに対応する従業員情報を返します。
+	 */
+	public Employee showDetail(Integer id) {
+		return repository.load(id);
+	}
 }
