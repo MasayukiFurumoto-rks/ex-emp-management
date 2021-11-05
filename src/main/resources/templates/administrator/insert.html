@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">	
 <title>従業員管理システム</title>
 <link rel="stylesheet" href="../../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" >
 <link rel="stylesheet" href="../../static/css/style.css" th:href="@{/css/style.css}" >
@@ -29,7 +29,7 @@
 				
 <!-- ここから上を編集する必要はありません -->
 
-					<form method="post" th:action="@{/inserted}" th:object="${insertAdministratorForm}">
+					<form method="post" th:action="@{/insert}" th:object="${insertAdministratorForm}">
 						<fieldset>
 							<legend>管理者登録<br>(システムにログインできる管理者を登録します)</legend>
 										<label class="error-messages" th:if="${notUniqueMail}!=null" th:text="${notUniqueMail}">

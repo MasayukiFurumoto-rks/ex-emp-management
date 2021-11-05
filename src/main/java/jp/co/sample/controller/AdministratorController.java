@@ -112,7 +112,7 @@ public class AdministratorController {
 		BeanUtils.copyProperties(form, administrator);
 		try {
 			service.insert(administrator);
-			return "redirect:/";
+			return "forward:/inserted";
 		} catch (Exception e) {
 			model.addAttribute("notUniqueMail", "このメールアドレスは既に使用されています。");
 			return "administrator/insert";
