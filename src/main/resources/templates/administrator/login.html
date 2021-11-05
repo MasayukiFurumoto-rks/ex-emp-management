@@ -28,10 +28,13 @@
 
 <!-- ここから上を編集する必要はありません -->
 
-			<form method="post" th:action="@{/login}" action="../employee/list.html" th:object="${loginForm}">
+			<form method="post" th:action="@{/inserted}" action="../employee/list.html" th:object="${loginForm}">
 						<fieldset>
 							<legend>ログイン</legend>
 							<div class="form-group">
+								<div th:if="${insertedMessage}!=null"  class="alert alert-danger">
+			                        <span th:text="${insertedMessage}">管理者情報を発行しました(モック)</span>
+			                    </div>
 								<div th:if="${needsLogin}!=null"  class="alert alert-danger">
 			                        <span th:text="${needsLogin}">ログインしてください(モック)</span>
 			                    </div>

@@ -29,9 +29,12 @@
 				
 <!-- ここから上を編集する必要はありません -->
 
-					<form method="post" th:action="@{/insert}" th:object="${insertAdministratorForm}">
+					<form method="post" th:action="@{/inserted}" th:object="${insertAdministratorForm}">
 						<fieldset>
 							<legend>管理者登録<br>(システムにログインできる管理者を登録します)</legend>
+										<label class="error-messages" th:if="${notUniqueMail}!=null" th:text="${notUniqueMail}">
+											このメールアドレスはすでに使用されています。
+										</label>
 							<!-- 氏名 -->
 							<div class="form-group">
 								<div class="row">

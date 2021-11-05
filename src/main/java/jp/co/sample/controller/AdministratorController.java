@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
@@ -101,16 +102,27 @@ public class AdministratorController {
 	 * @return ログイン画面を表示するためのURLを返します。
 	 */
 	@RequestMapping("/insert")
-	public String insert(@Validated InsertAdministratorForm form,BindingResult result) {
-		
-		if(result.hasErrors()) {
+	public String insert(@Validated InsertAdministratorForm form, BindingResult result, Model model) {
+
+		if (result.hasErrors()) {
 			return toInsert();
 		}
-		
-		
+
 		Administrator administrator = new Administrator();
 		BeanUtils.copyProperties(form, administrator);
-		service.insert(administrator);
+		try {
+			service.insert(administrator);
+			return "redirect:/";
+		} catch (Exception e) {
+			model.addAttribute("notUniqueMail", "このメールアドレスは既に使用されています。");
+			return "administrator/insert";
+		}
+
+	}
+
+	@RequestMapping("/inserted")
+	public String inserted(RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("insertedMessage", "管理者アカウントを作成しました。ログインしてください。");
 		return "redirect:/";
 	}
 
@@ -118,13 +130,13 @@ public class AdministratorController {
 	 * ログアウトを行うためのメソッドです。<br>
 	 * セッションに保存されている情報を削除し、ログイン画面にリダイレクトします。
 	 * 
-	 * @return　ログイン画面にリダイレクトします。
+	 * @return ログイン画面にリダイレクトします。
 	 */
 	@RequestMapping("/logout")
 	public String logout(Model model) {
 		session.invalidate();
-		
+
 		return "redirect:/";
 	}
-	
+
 }
