@@ -79,7 +79,8 @@ public class AdministratorController {
 			return "administrator/login";
 		} else {
 			session.setAttribute("administratorName", administrator.getName());
-			return "forward:/employee/showList";
+//			return "forward:/employee/showList";
+			return "redirect:/employee/showList";
 		}
 	}
 
@@ -120,8 +121,9 @@ public class AdministratorController {
 	 * @return　ログイン画面にリダイレクトします。
 	 */
 	@RequestMapping("/logout")
-	public String logout() {
+	public String logout(Model model) {
 		session.invalidate();
+		
 		return "redirect:/";
 	}
 	
