@@ -57,6 +57,30 @@ public class EmployeeController {
 	}
 
 	/**
+	 * すべての従業員情報をサービスクラスからもらってきて、それをリクエストスコープに格納するメソッドです。<br>
+	 * 
+	 * @param model リクエストスコープ
+	 * @return 従業員情報を表示するためのページを返します。
+	 */
+	@RequestMapping("/showListAsPage")
+	public String showListAsPage(Integer pageNum,Model model, RedirectAttributes redirectAttributes) {
+		if (session.getAttribute("administratorName") == null) {
+			redirectAttributes.addFlashAttribute("needsLogin", "ログインしてください。");
+			return "redirect:/";
+		}
+		
+		if (pageNum== null) {
+			pageNum = 1;
+		}
+		
+		List<Employee> employeeList = service.showListAsPage(pageNum);
+		model.addAttribute("employeeList", employeeList);
+		return "employee/list";
+	}
+	
+	
+	
+	/**
 	 * 特定の従業員情報をサービスクラスからもらってきて、それをリクエストスコープに格納、その後表示画面へ遷移させるメソッドです。<br>
 	 * 
 	 * @param id    主キー
