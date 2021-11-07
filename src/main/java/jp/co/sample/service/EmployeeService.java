@@ -38,7 +38,7 @@ public class EmployeeService {
 	 * 
 	 * @return 従業員情報を全件取得したリスト。
 	 */
-	public List<Employee> showListAsPage(Integer pageNum) {
+	public List<List<Employee>> showListAsPage() {
 		
 		List<List<Employee>> employeePageList = new ArrayList<>();
 		List<Employee> employeeAllList = repository.findAll();
@@ -61,7 +61,7 @@ public class EmployeeService {
 
 		// ③そのリストからpageNum-1でgetしてリターンする
 		
-		return employeePageList.get(pageNum-1);
+		return employeePageList;
 		
 	}
 	

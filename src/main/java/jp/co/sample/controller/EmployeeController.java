@@ -63,19 +63,22 @@ public class EmployeeController {
 	 * @return 従業員情報を表示するためのページを返します。
 	 */
 	@RequestMapping("/showListAsPage")
-	public String showListAsPage(Integer pageNum,Model model, RedirectAttributes redirectAttributes) {
+	public String showListAsPage(Integer page,Model model, RedirectAttributes redirectAttributes) {
 		if (session.getAttribute("administratorName") == null) {
 			redirectAttributes.addFlashAttribute("needsLogin", "ログインしてください。");
 			return "redirect:/";
 		}
 		
-		if (pageNum== null) {
-			pageNum = 1;
+		if (page == null) {
+			page = 1;
 		}
 		
-		List<Employee> employeeList = service.showListAsPage(pageNum);
-		model.addAttribute("employeeList", employeeList);
-		return "employee/list";
+		List<List<Employee>> employeePageList = service.showListAsPage();
+		model.addAttribute("employeePageList", employeePageList);
+		
+		List<Employee> employeePage = employeePageList.get(page-1);
+		model.addAttribute("employeePage", employeePage);
+		return "employee/list2";
 	}
 	
 	
