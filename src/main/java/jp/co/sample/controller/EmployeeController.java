@@ -78,7 +78,7 @@ public class EmployeeController {
 		
 		List<Employee> employeePage = employeePageList.get(page-1);
 		model.addAttribute("employeePage", employeePage);
-		return "employee/list2";
+		return "employee/list-as-page";
 	}
 	
 	
